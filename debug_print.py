@@ -79,8 +79,8 @@ class Debug():
 
     filename:line_number method()  <your_text_here>
 
-    If debug_flag is False, printing will be shut off. However, this can be overridden
-    see the print() method.
+    If debug_flag is False, printing will be shut off. However, this can be overridden.
+    See the print() method.
     """
     def __init__(self, *args, **kwargs):
         """
@@ -144,6 +144,20 @@ class Debug():
         print(basename + ":" + str(this_entry[1]), method, args, kwargs, file=fp)
 
     def print(self, *args, **kwargs):
+        """
+        If the debug_flag is False this will not print. However, this can be overridden
+        by either:
+        1. By setting the keyword "definitely" to "True" in the debug.print() call, or
+        2. By setting the keyword "level" to a hexadecimal flag value. If that value when
+           AND-ed against the register value is truthy *, then the print will occur.
+           * see https://stackoverflow.com/questions/39983695/what-is-truthy-and-falsy-in-python-how-is-it-different-from-true-and-false)
+        For example:
+        debug = Debug(register=0x01)
+
+        :param args: The stuff to be printed.
+        :param kwargs: definitely, or level
+        :return: nothing
+        """
         self._print(*args, **kwargs, fp=self.out_fp)
 
     def err_print(self, *args, **kwargs):
