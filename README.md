@@ -18,4 +18,4 @@ That is, it prints:
 
     filename:line_number method()  <your_text_here>
 
-If debug_flag is False, printing will be shut off. However, this can be overridden see the print() method.
+If debug_flag is False, printing will be shut off. However, this can be overridden. See the print() method.
