@@ -19,7 +19,8 @@
 #
 #       ...that's a joke.
 #
-#       This only works with kivy. That's not a joke.
+#       This was designed to work with kivy, although that's not necessary
+#       (only if you print_widget_ancestry). That's not a joke.
 
 from __future__ import print_function
 import traceback
@@ -117,7 +118,11 @@ class Debug():
         by either:
         1. By setting the keyword "definitely" to "True" in the debug.print() call, or
         2. By setting the keyword "level" to a hexadecimal flag value. If that value when
-           AND-ed with
+           AND-ed against the register value is truthy *, then the print will occur.
+           * see https://stackoverflow.com/questions/39983695/what-is-truthy-and-falsy-in-python-how-is-it-different-from-true-and-false)
+        For example:
+        debug = Debug(register=0x01)
+
         :param args: The stuff to be printed.
         :param kwargs: definitely, or level
         :return: nothing
