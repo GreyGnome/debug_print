@@ -135,8 +135,14 @@ class Debug():
                 if not self.debug_flag:
                     return
         trace = traceback.extract_stack()
-        # print (len(trace))
-        this_entry = trace[len(trace) - 2]
+        # print ("DEBUG debug_print: LEN trace: ", len(trace))
+        # print ("DEBUG debug_print: type trace: ", type(trace))
+        # for entry in trace:
+        #     print ("DEBUG debug_print entry: ", entry)
+        #
+        # The last one is this method, which is called by the print method,
+        # which was called by the actual program under debug. Hence: len - 3
+        this_entry = trace[len(trace) - 3]
         basename = this_entry[0].split('/')
         basename = "%-10s" % basename[len(basename) - 1]
         method = this_entry[2] + "()"
@@ -161,7 +167,7 @@ class Debug():
         self._print(*args, **kwargs, fp=self.out_fp)
 
     def err_print(self, *args, **kwargs):
-        self._print(*args, **kwargs, fp=self.err_fp)
+        self._print(*args, fp=self.err_fp, **kwargs)
 
     def print_trace(self, *args, **kwargs):
         definitely = kwargs.pop('definitely', False)
