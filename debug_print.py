@@ -164,7 +164,7 @@ class Debug():
         :param kwargs: definitely, or level
         :return: nothing
         """
-        self._print(*args, **kwargs, fp=self.out_fp)
+        self._print(*args, fp=self.out_fp, **kwargs)
 
     def err_print(self, *args, **kwargs):
         self._print(*args, fp=self.err_fp, **kwargs)
